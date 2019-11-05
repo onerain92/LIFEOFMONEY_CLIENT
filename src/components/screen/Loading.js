@@ -1,21 +1,32 @@
-import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Image, StyleSheet, Dimensions} from 'react-native';
 import {APP_LOADING} from '../../utils/Images';
 
-function Loading(props) {
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+
+const Loading = props => {
+  useEffect(() => {
+    setTimeout(() => {
+      props.navigation.navigate('AuthStackNavigator');
+    }, 2000);
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Image source={APP_LOADING} />
+      <Image style={styles.img} source={APP_LOADING} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
+  img: {
+    width: width,
+    height: height
+  }
 });
 
 export default Loading;

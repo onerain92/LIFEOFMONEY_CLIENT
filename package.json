@@ -15,7 +15,12 @@
     "react-native": "0.61.3",
     "react-native-fbsdk": "1.0.4",
     "react-native-gesture-handler": "^1.5.0",
-    "react-navigation": "^4.0.10"
+    "react-native-vector-icons": "^6.6.0",
+    "react-navigation": "^4.0.10",
+    "react-navigation-material-bottom-tabs": "^2.1.5",
+    "react-navigation-stack": "^1.10.3",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",

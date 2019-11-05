@@ -1,12 +1,12 @@
 import {createStackNavigator} from 'react-navigation-stack';
 
-import Login from '../screen/Login';
+import Search from '../screen/Search';
 
 export default createStackNavigator(
   {
-    Login
+    Search
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: '',
   },
 );

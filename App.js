@@ -12,19 +12,7 @@ import {View, StyleSheet} from 'react-native';
 import {AppContainer} from './src/components/navigation/SwitchNavigator';
 
 function App(props) {
-  return (
-    <View style={styles.container}>
-      <AppContainer />
-    </View>
-  );
+  return <AppContainer />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default App;
