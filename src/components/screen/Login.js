@@ -34,10 +34,12 @@ const Login = props => {
   return (
     <View style={styles.container}>
       <Image source={APP_LOGO} style={styles.logo} />
-      <Facebook />
       <TouchableOpacity onPress={fbAuth}>
         <View style={styles.loginBtn}>
+          <Facebook />
+          <View style={styles.line}>
           <Text style={styles.loginTxt}>페이스북으로 시작하기</Text>
+          </View>
         </View>
       </TouchableOpacity>
     </View>
@@ -56,12 +58,24 @@ const styles = StyleSheet.create({
     height: 80,
   },
   loginBtn: {
-    padding: 10,
+    flexDirection: "row",
+    width: 280,
+    marginTop: 350,
+    padding: 20,
     backgroundColor: '#4267B2',
     borderRadius: 5,
+    alignItems: "center"
+  },
+  line: {
+    marginLeft: 20,
+    borderStyle: "solid",
+    borderLeftWidth: 1,
+    borderColor: "#364fc7"
   },
   loginTxt: {
-    fontSize: 20,
+    paddingLeft: 30,
+    fontSize: 15,
+    fontWeight: "bold",
     color: '#ffffff',
   },
 });
