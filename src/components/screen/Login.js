@@ -1,31 +1,71 @@
 // @flow
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import {
   View,
   StyleSheet,
-  ScrollView,
   TouchableOpacity,
   Text,
   Image,
+  ActivityIndicator,
 } from 'react-native';
-import {LoginManager} from 'react-native-fbsdk';
+import AsyncStorage from '@react-native-community/async-storage';
+import {LoginManager, AccessToken} from 'react-native-fbsdk';
+import {getUser} from '../../api/index';
+import {setUser} from '../../actions/index';
 import {APP_LOGO} from '../../utils/Images';
-import {Facebook} from '../../../assets/icons/Icons';
+import {FacebookIcon} from '../../../assets/icons/Icons';
 
 const Login = props => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    confirmToken();
+  }, []);
+
+  const confirmToken = async () => {
+    try {
+      const token = await AsyncStorage.getItem('token');
+
+      if (token) {
+        getUser(token).then(data => {
+          if (data.user) {
+            dispatch(setUser(data.user));
+            setTimeout(() => {
+              props.navigation.navigate('MainStackNavigator');
+            }, 2000);
+          }
+        });
+      }
+    } catch (error) {
+      console.log("Can't read token");
+    }
+  };
+
   const fbAuth = () => {
-    LoginManager.logInWithPermissions(['public_profile']).then(
-      function(result) {
+    LoginManager.logInWithPermissions(['public_profile', 'email']).then(
+      result => {
         if (result.isCancelled) {
           console.log('Login was cancelled');
         } else {
-          console.log(
-            'Login was successful with permissions: ' +
-              result.grantedPermissions.toString(),
-          );
+          AccessToken.getCurrentAccessToken()
+            .then(async data => {
+              await AsyncStorage.setItem('token', data.accessToken);
+              getUser(data.accessToken).then(data => {
+                if (data.user) {
+                  dispatch(setUser(data.user));
+                  props.navigation.navigate('MainStackNavigator');
+                } else {
+                  props.navigation.navigate('AuthStackNavigator');
+                }
+              });
+            })
+            .catch(error => {
+              console.log('Token is not published');
+            });
         }
       },
-      function(error) {
+      error => {
         console.log('Login failed with error: ' + error);
       },
     );
@@ -34,11 +74,16 @@ const Login = props => {
   return (
     <View style={styles.container}>
       <Image source={APP_LOGO} style={styles.logo} />
+      <ActivityIndicator
+        style={styles.indicator}
+        size="large"
+        color="#0000ff"
+      />
       <TouchableOpacity onPress={fbAuth}>
         <View style={styles.loginBtn}>
-          <Facebook />
+          <FacebookIcon />
           <View style={styles.line}>
-          <Text style={styles.loginTxt}>페이스북으로 시작하기</Text>
+            <Text style={styles.loginTxt}>페이스북으로 시작하기</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -56,26 +101,31 @@ const styles = StyleSheet.create({
   logo: {
     width: 280,
     height: 80,
+    marginBottom: 300,
+  },
+  indicator: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
   },
   loginBtn: {
-    flexDirection: "row",
+    flexDirection: 'row',
     width: 280,
-    marginTop: 350,
     padding: 20,
     backgroundColor: '#4267B2',
     borderRadius: 5,
-    alignItems: "center"
+    alignItems: 'center',
   },
   line: {
     marginLeft: 20,
-    borderStyle: "solid",
+    borderStyle: 'solid',
     borderLeftWidth: 1,
-    borderColor: "#364fc7"
+    borderColor: '#364fc7',
   },
   loginTxt: {
     paddingLeft: 30,
     fontSize: 15,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: '#ffffff',
   },
 });

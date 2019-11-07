@@ -10,29 +10,29 @@ import {
 } from 'react-native';
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
 
-import {ratio, colors, statusBarHeight} from '../../utils/Styles';
+// import {ratio, colors, statusBarHeight} from '../../utils/Styles';
 import {
-  Money_Black,
-  Mypage_Black,
-  Result_Black,
-  Search_Black,
-} from '../../utils/Icons';
+  CheckMoneyIcon,
+  ResultIcon,
+  MypageIcon,
+} from '../../../assets/icons/Icons';
 
+import CheckMoneyStackNavigator from '../navigation/CheckMoneyStackNavigator';
 import Mypage from '../screen/Mypage';
 import RecipientInfo from '../screen/RecipientInfo';
 import Result from '../screen/Result';
 
 export const MainTabNavigator = createMaterialBottomTabNavigator(
   {
-    Mypage,
-    RecipientInfo,
-    Result
+    CheckMoneyStackNavigator,
+    Mypage: {screen: Mypage},
+    Result: {screen: Result},
   },
   {
-    initialRouteName: 'Screen1',
+    initialRouteName: 'Mypage',
     activeTintColor: '#f0edf6',
     inactiveTintColor: '#3e2465',
-    barStyle: {backgroundColor: '#694fad'},
+    barStyle: {backgroundColor: '#FFE555'},
     navigationOptions: ({navigation}) => ({
       tabBarIcon: ({focused, tintColor}) => {
         const {routeName} = navigation.state;
@@ -42,7 +42,7 @@ export const MainTabNavigator = createMaterialBottomTabNavigator(
               width: 24,
               height: 24,
             }}
-            source={Money_Black}
+            source={<MypageIcon />}
           />
         );
       },
