@@ -2,6 +2,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {
+  SafeAreaView,
   View,
   StyleSheet,
   TouchableOpacity,
@@ -12,7 +13,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import {LoginManager, AccessToken} from 'react-native-fbsdk';
 import {getUser} from '../../api/index';
-import {setUser} from '../../actions/index';
+import {saveUser} from '../../actions/index';
 import {APP_LOGO} from '../../utils/Images';
 import {FacebookIcon} from '../../../assets/icons/Icons';
 
@@ -30,7 +31,7 @@ const Login = props => {
       if (token) {
         getUser(token).then(data => {
           if (data.user) {
-            dispatch(setUser(data.user));
+            dispatch(saveUser(data.user));
             setTimeout(() => {
               props.navigation.navigate('MainStackNavigator');
             }, 2000);
@@ -53,7 +54,7 @@ const Login = props => {
               await AsyncStorage.setItem('token', data.accessToken);
               getUser(data.accessToken).then(data => {
                 if (data.user) {
-                  dispatch(setUser(data.user));
+                  dispatch(saveUser(data.user));
                   props.navigation.navigate('MainStackNavigator');
                 } else {
                   props.navigation.navigate('AuthStackNavigator');
@@ -72,7 +73,7 @@ const Login = props => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image source={APP_LOGO} style={styles.logo} />
       <ActivityIndicator
         style={styles.indicator}
@@ -87,7 +88,7 @@ const Login = props => {
           </View>
         </View>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 

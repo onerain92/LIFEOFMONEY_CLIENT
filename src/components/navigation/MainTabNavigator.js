@@ -17,19 +17,18 @@ import {
   MypageIcon,
 } from '../../../assets/icons/Icons';
 
-import CheckMoneyStackNavigator from '../navigation/CheckMoneyStackNavigator';
+import CreateRecipient from '../screen/CreateRecipient';
+import ListStackNavigator from './ListStackNavigator';
 import Mypage from '../screen/Mypage';
-import RecipientInfo from '../screen/RecipientInfo';
-import Result from '../screen/Result';
 
 export const MainTabNavigator = createMaterialBottomTabNavigator(
   {
-    CheckMoneyStackNavigator,
+    ListStackNavigator,
+    CreateRecipient: {screen:CreateRecipient},
     Mypage: {screen: Mypage},
-    Result: {screen: Result},
   },
   {
-    initialRouteName: 'Mypage',
+    initialRouteName: 'ListStackNavigator',
     activeTintColor: '#f0edf6',
     inactiveTintColor: '#3e2465',
     barStyle: {backgroundColor: '#FFE555'},

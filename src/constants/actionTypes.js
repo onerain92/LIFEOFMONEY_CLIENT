@@ -1,1 +1,2 @@
-export const SET_USER = "SET_USER";
+export const SAVE_USER = 'SAVE_USER';
+export const SAVE_RECIPIENT_LISTS = 'SAVE_RECIPIENT_LISTS';

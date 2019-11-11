@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, Image, StyleSheet, Dimensions} from 'react-native';
+import {SafeAreaView, View, Image, StyleSheet, Dimensions} from 'react-native';
 import {APP_LOADING} from '../../utils/Images';
 
 const width = Dimensions.get('window').width;
@@ -13,9 +13,9 @@ const Loading = props => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image style={styles.img} source={APP_LOADING} />
-    </View>
+    </SafeAreaView>
   );
 };
 

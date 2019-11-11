@@ -1,7 +1,10 @@
+import {View, Image, Button} from 'react-native';
 import {createStackNavigator} from 'react-navigation-stack';
 
 import {MainTabNavigator} from '../navigation/MainTabNavigator';
 import Search from '../screen/Search';
+
+import {APP_LOGO} from '../../utils/Images';
 
 export default createStackNavigator(
   {
@@ -10,5 +13,10 @@ export default createStackNavigator(
   },
   {
     initialRouteName: 'MainTabNavigator',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#FFE555',
+      },
+    },
   },
 );

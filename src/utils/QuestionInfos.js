@@ -18,7 +18,7 @@ const questionInfos = [
       amount: 10000,
     },
     no: {
-      nextStage: 1,
+      nextStage: 2,
     },
     image:
       'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
@@ -72,6 +72,7 @@ const questionInfos = [
     question: '자주 보는 사이다.',
     yes: {
       nextStage: 7,
+      amount: 10000,
     },
     no: {
       nextStage: 8,
@@ -83,6 +84,7 @@ const questionInfos = [
     question: '이번이 재혼이다.',
     yes: {
       nextStage: 9,
+      amount: -20000,
     },
     no: {
       nextStage: 10,
