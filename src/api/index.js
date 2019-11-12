@@ -37,3 +37,36 @@ export const getRecipientLists = userId => {
       console.error(error);
     });
 };
+
+export const createEvent = (userId, recipientId, eventType, amount) => {
+  return api
+    .post('/event', {userId, recipientId, eventType, amount})
+    .then(res => {
+      return res.data;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+};
+
+export const getEvent = (userId, recipientId) => {
+  return api
+    .get(`/event/${userId}/${recipientId}`)
+    .then(res => {
+      return res.data;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+};
+
+export const getTotalMoney = userId => {
+  return api
+    .get(`event/${userId}`)
+    .then(res => {
+      return res.data;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+};

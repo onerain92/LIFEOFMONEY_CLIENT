@@ -1,9 +1,20 @@
 import {combineReducers} from 'redux';
-import {SAVE_USER, SAVE_RECIPIENT_LISTS} from '../constants/actionTypes';
+import {
+  SAVE_USER,
+  SAVE_RECIPIENT_LISTS,
+  SAVE_SPENDING_EVENT_LISTS,
+  SAVE_RECEIVED_EVENT_LISTS,
+  SAVE_TOTAL_SPENDING_MONEY,
+  SAVE_TOTAL_RECEIVED_MONEY,
+} from '../constants/actionTypes';
 
 const initialState = {
   user: {},
   recipientLists: [],
+  spendingEventLists: [],
+  receivedEventLists: [],
+  totalSpendingMoney: 0,
+  totalReceivedMoney: 0,
 };
 
 const userReducer = (state = initialState.user, action) => {
@@ -24,7 +35,59 @@ const recipientListsReducer = (state = initialState.recipientLists, action) => {
   }
 };
 
+const spendingEventListsReducer = (
+  state = initialState.spendingEventLists,
+  action,
+) => {
+  switch (action.type) {
+    case SAVE_SPENDING_EVENT_LISTS:
+      return action.list;
+    default:
+      return state;
+  }
+};
+
+const receivedEventListsReducer = (
+  state = initialState.receivedEventLists,
+  action,
+) => {
+  switch (action.type) {
+    case SAVE_RECEIVED_EVENT_LISTS:
+      return action.list;
+    default:
+      return state;
+  }
+};
+
+const totalSpendingMoneyReducer = (
+  state = initialState.totalSpendingMoney,
+  action,
+) => {
+  switch (action.type) {
+    case SAVE_TOTAL_SPENDING_MONEY:
+      return action.list;
+    default:
+      return state;
+  }
+};
+
+const totalReceivedMoneyReducer = (
+  state = initialState.totalReceivedMoney,
+  action,
+) => {
+  switch (action.type) {
+    case SAVE_TOTAL_RECEIVED_MONEY:
+      return action.list;
+    default:
+      return state;
+  }
+};
+
 export default lifeOfMoney = combineReducers({
   user: userReducer,
   recipientLists: recipientListsReducer,
+  spendingEventLists: spendingEventListsReducer,
+  receivedEventLists: receivedEventListsReducer,
+  totalSpendingMoney: totalSpendingMoneyReducer,
+  totalReceivedMoney: totalReceivedMoneyReducer,
 });

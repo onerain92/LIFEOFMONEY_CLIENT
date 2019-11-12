@@ -22,12 +22,12 @@ const List = props => {
     });
   }, []);
 
-  const Recipient = ({id, name, relation}) => {
+  const Recipient = ({recipientId, name, relation}) => {
     return (
       <TouchableOpacity
         style={styles.recipientList}
         onPress={() =>
-          props.navigation.navigate('ListDetails', {id, name, relation})
+          props.navigation.navigate('ListDetails', {recipientId, name, relation})
         }>
         <View>
           <Text>{relation}</Text>
@@ -46,7 +46,7 @@ const List = props => {
       <FlatList
         data={recipientLists}
         renderItem={({item}) => (
-          <Recipient id={item._id} name={item.name} relation={item.relation} />
+          <Recipient recipientId={item._id} name={item.name} relation={item.relation} />
         )}
         keyExtractor={item => item._id}
       />
