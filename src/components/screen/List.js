@@ -22,20 +22,24 @@ const List = props => {
     });
   }, []);
 
-  const Recipient = ({recipientId, name, relation}) => {
+  const Recipient = ({recipientId, name, relation, spendMoney, receivedMoney}) => {
     return (
       <TouchableOpacity
         style={styles.recipientList}
         onPress={() =>
-          props.navigation.navigate('ListDetails', {recipientId, name, relation})
+          props.navigation.navigate('ListDetails', {
+            recipientId,
+            name,
+            relation,
+          })
         }>
         <View>
           <Text>{relation}</Text>
           <Text>{name}</Text>
           <Text>준 돈</Text>
-          <Text>0원</Text>
+          <Text>{spendMoney}원</Text>
           <Text>받은 돈</Text>
-          <Text>0원</Text>
+          <Text>{receivedMoney}원</Text>
         </View>
       </TouchableOpacity>
     );
@@ -46,7 +50,13 @@ const List = props => {
       <FlatList
         data={recipientLists}
         renderItem={({item}) => (
-          <Recipient recipientId={item._id} name={item.name} relation={item.relation} />
+          <Recipient
+            recipientId={item._id}
+            name={item.name}
+            relation={item.relation}
+            spendMoney={item.spendMoney}
+            receivedMoney={item.receivedMoney}
+          />
         )}
         keyExtractor={item => item._id}
       />

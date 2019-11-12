@@ -1,12 +1,22 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {SafeAreaView, View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import {colors} from '../../utils/Styles';
+import {getTotalMoney} from '../../api/index';
+import {saveTotalSpendMoney, saveTotalReceivedMoney} from '../../actions/index';
 
 const Mypage = props => {
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  console.log(user);
+  const totalSpendMoney = useSelector(state => state.totalSpendMoney);
+  const totalReceivedMoney = useSelector(state => state.totalReceivedMoney);
+
+  useEffect(() => {
+    getTotalMoney(user.id).then(data => {
+      dispatch(saveTotalSpendMoney(data.totalSpendMoney));
+      dispatch(saveTotalReceivedMoney(data.totalReceivedMoney));
+    })
+  }, []);
 
   const logout = async () => {
     await AsyncStorage.removeItem('token');
@@ -16,8 +26,8 @@ const Mypage = props => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <View style={styles.profileImage}>
-          <Image source={{uri: user.picture}} />
+        <View>
+          <Image source={{uri: user.picture}} style={styles.profileImage} />
         </View>
         <View>
           <Text>{user.username}</Text>
@@ -32,9 +42,9 @@ const Mypage = props => {
       </TouchableOpacity>
 
       <Text>내가 쓴 총 금액</Text>
-      <Text></Text>
+      <Text>{totalSpendMoney}</Text>
       <Text>내가 받은 총 금액</Text>
-      <Text></Text>
+      <Text>{totalReceivedMoney}</Text>
 
     </SafeAreaView>
   );

@@ -3,7 +3,7 @@ import {
   SAVE_RECIPIENT_LISTS,
   SAVE_SPENDING_EVENT_LISTS,
   SAVE_RECEIVED_EVENT_LISTS,
-  SAVE_TOTAL_SPENDING_MONEY,
+  SAVE_TOTAL_SPEND_MONEY,
   SAVE_TOTAL_RECEIVED_MONEY
 } from '../constants/actionTypes';
 
@@ -27,12 +27,12 @@ export const saveReceivedEventLists = list => ({
   list,
 });
 
-export const totalSpendingMoney = money => ({
-  type: SAVE_TOTAL_SPENDING_MONEY,
+export const saveTotalSpendMoney = money => ({
+  type: SAVE_TOTAL_SPEND_MONEY,
   money,
 });
 
-export const totalReceivedMoney = money => ({
+export const saveTotalReceivedMoney = money => ({
   type: SAVE_TOTAL_RECEIVED_MONEY,
   money,
 });

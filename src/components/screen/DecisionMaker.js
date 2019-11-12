@@ -33,8 +33,11 @@ const DecisionMaker = props => {
 
           {isEndStage ? (
             <View>
+              <View>
+                <Text>{money}</Text>
+              </View>
               <Button
-                title="결과보기"
+                title="확인"
                 onPress={() => {
                   props.navigation.navigate('AddEvent');
                 }}

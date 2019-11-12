@@ -4,7 +4,7 @@ import {
   SAVE_RECIPIENT_LISTS,
   SAVE_SPENDING_EVENT_LISTS,
   SAVE_RECEIVED_EVENT_LISTS,
-  SAVE_TOTAL_SPENDING_MONEY,
+  SAVE_TOTAL_SPEND_MONEY,
   SAVE_TOTAL_RECEIVED_MONEY,
 } from '../constants/actionTypes';
 
@@ -13,7 +13,7 @@ const initialState = {
   recipientLists: [],
   spendingEventLists: [],
   receivedEventLists: [],
-  totalSpendingMoney: 0,
+  totalSpendMoney: 0,
   totalReceivedMoney: 0,
 };
 
@@ -59,13 +59,13 @@ const receivedEventListsReducer = (
   }
 };
 
-const totalSpendingMoneyReducer = (
-  state = initialState.totalSpendingMoney,
+const totalSpendMoneyReducer = (
+  state = initialState.totalSpendMoney,
   action,
 ) => {
   switch (action.type) {
-    case SAVE_TOTAL_SPENDING_MONEY:
-      return action.list;
+    case SAVE_TOTAL_SPEND_MONEY:
+      return action.money;
     default:
       return state;
   }
@@ -77,7 +77,7 @@ const totalReceivedMoneyReducer = (
 ) => {
   switch (action.type) {
     case SAVE_TOTAL_RECEIVED_MONEY:
-      return action.list;
+      return action.money;
     default:
       return state;
   }
@@ -88,6 +88,6 @@ export default lifeOfMoney = combineReducers({
   recipientLists: recipientListsReducer,
   spendingEventLists: spendingEventListsReducer,
   receivedEventLists: receivedEventListsReducer,
-  totalSpendingMoney: totalSpendingMoneyReducer,
+  totalSpendMoney: totalSpendMoneyReducer,
   totalReceivedMoney: totalReceivedMoneyReducer,
 });
