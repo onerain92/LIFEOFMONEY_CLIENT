@@ -82,3 +82,33 @@ export const EditIcon = props => (
     <Path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
   </Svg>
 );
+
+export const PlusIcon = props => (
+  <Svg
+    width={24}
+    height={24}
+    fill="none"
+    stroke="#00A67A"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="prefix__feather prefix__feather-plus"
+    {...props}>
+    <Path d="M12 5v14M5 12h14" />
+  </Svg>
+);
+
+export const MinusIcon = props => (
+  <Svg
+    width={24}
+    height={24}
+    fill="none"
+    stroke="#fa5252"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="prefix__feather prefix__feather-minus"
+    {...props}>
+    <Path d="M5 12h14" />
+  </Svg>
+);

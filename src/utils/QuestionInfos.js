@@ -8,8 +8,7 @@ const questionInfos = [
     no: {
       nextStage: 2,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage1.png',
   },
   {
     question: '청첩장을 직접 받았다.',
@@ -20,8 +19,7 @@ const questionInfos = [
     no: {
       nextStage: 2,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage2.png',
   },
   {
     question: '모바일로 받았다.',
@@ -32,8 +30,7 @@ const questionInfos = [
     no: {
       nextStage: 4,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage3.png',
   },
   {
     question: '인연을 맺은지 5년 이상이다.',
@@ -43,8 +40,7 @@ const questionInfos = [
     no: {
       nextStage: 8,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage4.png',
   },
   {
     question: '직장 동료이다.',
@@ -54,8 +50,7 @@ const questionInfos = [
     no: {
       nextStage: 3,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage5.png',
   },
   {
     question: 'SNS 친구다.',
@@ -65,8 +60,7 @@ const questionInfos = [
     no: {
       nextStage: 4,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage6.png',
   },
   {
     question: '자주 보는 사이다.',
@@ -77,8 +71,7 @@ const questionInfos = [
     no: {
       nextStage: 8,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage7.png',
   },
   {
     question: '이번이 재혼이다.',
@@ -89,8 +82,7 @@ const questionInfos = [
     no: {
       nextStage: 10,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage8.png',
   },
   {
     question: '식장이 호텔이다.',
@@ -101,8 +93,7 @@ const questionInfos = [
     no: {
       nextStage: 11,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage9.png',
   },
   {
     question: '그로부터 상처를 받은 적이 있다.',
@@ -113,8 +104,7 @@ const questionInfos = [
     no: {
       nextStage: 10,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage10.png',
   },
   {
     question: '결혼 성수기다.',
@@ -125,8 +115,7 @@ const questionInfos = [
     no: {
       nextStage: 12,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage11.png',
   },
   {
     question: '식장이 지방이다.',
@@ -137,8 +126,7 @@ const questionInfos = [
     no: {
       nextStage: 12,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage12.png',
   },
   {
     question: '나도 2년 안에 결혼할 예정이다.',
@@ -149,8 +137,7 @@ const questionInfos = [
     no: {
       nextStage: 13,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage13.png',
   },
   {
     question: '액수를 정했는데 뭔가 불안하다.',
@@ -161,18 +148,17 @@ const questionInfos = [
     no: {
       nextStage: 14,
     },
-    image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+    image: 'https://lifeofmoney.s3.ap-northeast-2.amazonaws.com/stage14.png',
   },
   {
     question: '봉투만 전해도 OK~',
     image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+      'http://img.khan.co.kr/news/2016/01/13/l_2016011301001731700139951.jpg',
   },
   {
     question: '필히 참석하자!',
     image:
-      'https://t1.daumcdn.net/liveboard/interbiz/9d3cc46f66de4366a2e19f351a5187bf.JPG',
+      'http://image.chosun.com/sitedata/image/201203/29/2012032900237_0.jpg',
   },
 ];
 

@@ -1,5 +1,5 @@
 // @flow
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {
   SafeAreaView,
@@ -19,6 +19,7 @@ import {FacebookIcon} from '../../../assets/icons/Icons';
 
 const Login = props => {
   const dispatch = useDispatch();
+  const [isToken, setIsToken] = useState(false);
 
   useEffect(() => {
     confirmToken();
@@ -29,6 +30,7 @@ const Login = props => {
       const token = await AsyncStorage.getItem('token');
 
       if (token) {
+        setIsToken(true);
         getUser(token).then(data => {
           if (data.user) {
             dispatch(saveUser(data.user));
@@ -75,19 +77,22 @@ const Login = props => {
   return (
     <SafeAreaView style={styles.container}>
       <Image source={APP_LOGO} style={styles.logo} />
-      <ActivityIndicator
-        style={styles.indicator}
-        size="large"
-        color="#0000ff"
-      />
-      <TouchableOpacity onPress={fbAuth}>
-        <View style={styles.loginBtn}>
-          <FacebookIcon />
-          <View style={styles.line}>
-            <Text style={styles.loginTxt}>페이스북으로 시작하기</Text>
+      {isToken ? (
+        <ActivityIndicator
+          style={styles.indicator}
+          size="large"
+          color="#0000ff"
+        />
+      ) : (
+        <TouchableOpacity onPress={fbAuth}>
+          <View style={styles.loginBtn}>
+            <FacebookIcon />
+            <View style={styles.line}>
+              <Text style={styles.loginTxt}>페이스북으로 시작하기</Text>
+            </View>
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      )}
     </SafeAreaView>
   );
 };

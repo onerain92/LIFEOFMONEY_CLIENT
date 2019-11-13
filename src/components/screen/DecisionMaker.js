@@ -34,7 +34,7 @@ const DecisionMaker = props => {
           {isEndStage ? (
             <View>
               <View>
-                <Text>{money}</Text>
+                <Text>{money}원</Text>
               </View>
               <Button
                 title="확인"
