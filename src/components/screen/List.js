@@ -14,7 +14,6 @@ import {saveRecipientLists} from '../../actions/index';
 import {PlusIcon, MinusIcon} from '../../../assets/icons/Icons';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 const List = props => {
   const dispatch = useDispatch();
