@@ -76,12 +76,10 @@ const Mypage = props => {
           <Text style={styles.totalSpendText}>총 지출</Text>
           <Text style={styles.totalSpendMoney}>{totalSpendMoney}</Text>
         </View>
-
         <View style={styles.totalRecivedWrapper}>
           <Text style={styles.totalReceivedText}>총 수입</Text>
           <Text style={styles.totalReceivedMoney}>{totalReceivedMoney}</Text>
         </View>
-
         <View style={styles.totalSumWrapper}>
           <Text style={styles.totalSumText}>합계</Text>
           <Text
@@ -102,11 +100,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   profileWrapper: {
-    flex: 0.2,
+    flex: 0.25,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingTop: 40,
-    paddingBottom: 20,
+    paddingTop: 60,
     borderStyle: 'solid',
     borderBottomWidth: 1,
     borderColor: '#ced4da',
@@ -117,6 +114,8 @@ const styles = StyleSheet.create({
   profileImage: {
     width: 100,
     height: 100,
+    borderWidth: 1,
+    borderColor: '#f1f3f5',
     borderRadius: 50,
   },
   infoWrapper: {
@@ -134,6 +133,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderRadius: 5,
+    borderColor: '#868e96',
     alignItems: 'center',
   },
   logoutTxt: {
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   gifWrapper: {
-    flex: 0.3,
+    flex: 0.4,
     position: 'relative',
     marginTop: 20,
     marginBottom: 40,
@@ -171,12 +171,8 @@ const styles = StyleSheet.create({
     color: '#495057',
   },
   totalInfoWrapper: {
-    flex: 0.5,
+    flex: 0.35,
     width: width * 0.7,
-
-    // borderStyle: 'solid',
-    // borderColor: '#dee2e6',
-    // borderWidth: 1,
   },
   totalSpendWrapper: {
     position: 'relative',
@@ -187,7 +183,7 @@ const styles = StyleSheet.create({
     color: '#fa5252',
   },
   totalSpendMoney: {
-    position: "absolute",
+    position: 'absolute',
     right: 20,
     fontSize: 20,
     color: '#fa5252',
@@ -204,7 +200,7 @@ const styles = StyleSheet.create({
     color: '#00A67A',
   },
   totalReceivedMoney: {
-    position: "absolute",
+    position: 'absolute',
     right: 20,
     fontSize: 20,
     color: '#00A67A',
@@ -219,14 +215,14 @@ const styles = StyleSheet.create({
     color: '#495057',
   },
   totalPlusSum: {
-    position: "absolute",
+    position: 'absolute',
     top: 20,
     right: 20,
     fontSize: 20,
     color: '#00A67A',
   },
   totalMinusSum: {
-    position: "absolute",
+    position: 'absolute',
     top: 20,
     right: 20,
     fontSize: 20,
