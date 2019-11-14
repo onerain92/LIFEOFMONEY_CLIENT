@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {
   SafeAreaView,
   View,
+  Dimensions,
   Text,
   TextInput,
   Button,
@@ -12,6 +13,8 @@ import {
 import Modal from 'react-native-modal';
 import {createRecipient} from '../../api/index';
 import {saveRecipientLists} from '../../actions/index';
+
+const width = Dimensions.get('window').width;
 
 const CreateRecipient = props => {
   const dispatch = useDispatch();
@@ -27,46 +30,49 @@ const CreateRecipient = props => {
       {isModal ? (
         <View>
           <Modal isVisible={true}>
-            <View style={styles.modalContent}>
-              <Text style={styles.content}>{modalContent}</Text>
-              <Button
-                style={styles.confirmButton}
-                title="확인"
-                onPress={() => {
-                  if (isSuccess) {
-                    setRecipient('');
-                    setRelation('');
-                    setModalContent('');
-                    setIsModal(false);
-                    setIsSuccess(false);
-                    props.navigation.navigate('ListStackNavigator');
-                  } else {
-                    setRecipient('');
-                    setRelation('');
-                    setModalContent('');
-                    setIsModal(false);
-                    setIsSuccess(false);
-                    props.navigation.navigate('CreateRecipient');
-                  }
-                }}
-              />
+            <View style={styles.modalContentWrapper}>
+              <Text style={styles.modalText}>{modalContent}</Text>
+              <View style={styles.confirmButton}>
+                <Button
+                  title="확인"
+                  color="#ffffff"
+                  onPress={() => {
+                    if (isSuccess) {
+                      setRecipient('');
+                      setRelation('');
+                      setModalContent('');
+                      setIsModal(false);
+                      setIsSuccess(false);
+                      props.navigation.navigate('ListStackNavigator');
+                    } else {
+                      setRecipient('');
+                      setRelation('');
+                      setModalContent('');
+                      setIsModal(false);
+                      setIsSuccess(false);
+                      props.navigation.navigate('CreateRecipient');
+                    }
+                  }}
+                />
+              </View>
             </View>
           </Modal>
         </View>
       ) : (
-        <View>
-          <View>
-            <Text>이름</Text>
+        <View style={styles.contentWrapper}>
+          <View style={styles.nameWrapper}>
+            <Text style={styles.nameText}>이름</Text>
             <TextInput
+              style={styles.nameInput}
               placeholder="상대방 이름을 적어주세요."
               onChangeText={text => setRecipient(text)}
               value={recipient}></TextInput>
           </View>
-          <View>
-            <Text>관계를 선택하세요.</Text>
+          <View style={styles.relationWrapper}>
+            <Text style={styles.relationText}>관계를 선택하세요.</Text>
             <Picker
+              style={styles.relationInput}
               selectedValue={relation}
-              style={styles.pickerInput}
               onValueChange={itemValue => {
                 setRelation(itemValue);
               }}>
@@ -77,22 +83,26 @@ const CreateRecipient = props => {
               <Picker.Item label="직장상사" value="직장상사" />
             </Picker>
           </View>
-          <View style={styles.createButton}>
-            <Button
-              title="추가하기"
-              onPress={() => {
-                createRecipient(userId, recipient, relation).then(data => {
-                  setIsModal(true);
-                  if (data.successMessage) {
-                    setIsSuccess(true);
-                    setModalContent(data.successMessage);
-                    dispatch(saveRecipientLists(data.recipientLists));
-                  } else {
-                    setIsSuccess(false);
-                    setModalContent(data.failureMessage);
-                  }
-                });
-              }}></Button>
+          <View style={styles.buttonWrapper}>
+            <View style={styles.createButton}>
+              <Button
+                title="추가하기"
+                color="#ffffff"
+                onPress={() => {
+                  createRecipient(userId, recipient, relation).then(data => {
+                    setIsModal(true);
+                    if (data.successMessage) {
+                      setIsSuccess(true);
+                      setModalContent(data.successMessage);
+                      dispatch(saveRecipientLists(data.recipientLists));
+                    } else {
+                      setIsSuccess(false);
+                      setModalContent(data.failureMessage);
+                    }
+                  });
+                }}
+              />
+            </View>
           </View>
         </View>
       )}
@@ -105,37 +115,84 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#ffffff',
   },
-  pickerInput: {
-    fontSize: 16,
-    paddingLeft: 10,
-    paddingTop: 15,
-    paddingHorizontal: 10,
-    paddingBottom: 12,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    backgroundColor: 'white',
-    color: 'black',
-  },
-  createButton: {
-    backgroundColor: '#FFE555',
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 25,
+  contentWrapper: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 5,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
+    width: width,
+    padding: 100,
+    backgroundColor: '#ffffff',
   },
-  content: {
-    padding: 20,
+  nameWrapper: {
+    flex: 0.2,
+    width: width * 0.8,
+  },
+  nameText: {
+    paddingBottom: 10,
+    fontSize: 20,
+    color: '#495057',
+  },
+  nameInput: {
+    width: '100%',
+    padding: 15,
+    fontSize: 20,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#868e96',
+  },
+  relationWrapper: {
+    flex: 0.6,
+    width: width * 0.8,
+    paddingTop: 20,
+  },
+  relationText: {
+    paddingBottom: 10,
+    fontSize: 20,
+    color: '#495057',
+  },
+  relationInput: {
+    paddingTop: 15,
+    paddingLeft: 10,
+    paddingHorizontal: 10,
+    paddingBottom: 12,
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#868e96',
+    borderRadius: 5,
+  },
+  buttonWrapper: {
+    flex: 0.2,
+    width: width * 0.8,
+    paddingTop: 30,
+  },
+  createButton: {
+    padding: 10,
+    backgroundColor: '#00A679',
+    borderRadius: 5,
+  },
+  modalContentWrapper: {
+    flex: 0.2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: 25,
+    borderRadius: 5,
+  },
+  modalText: {
+    width: '60%',
+    paddingBottom: 30,
+    textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
   },
   confirmButton: {
-    backgroundColor: '#FFE555',
+    width: '60%',
+    padding: 5,
+    borderRadius: 5,
+    backgroundColor: '#00A679',
   },
 });
 

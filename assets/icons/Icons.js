@@ -56,7 +56,7 @@ export const AddIcon = props => (
     width={24}
     height={24}
     fill="none"
-    stroke="currentColor"
+    stroke="#ffffff"
     strokeWidth={2}
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -72,7 +72,7 @@ export const EditIcon = props => (
     width={24}
     height={24}
     fill="none"
-    stroke="currentColor"
+    stroke="#adb5bd"
     strokeWidth={2}
     strokeLinecap="round"
     strokeLinejoin="round"

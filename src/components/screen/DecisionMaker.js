@@ -1,7 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, View, Text, StyleSheet, Button, Image} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Dimensions,
+  Text,
+  StyleSheet,
+  Button,
+  Image,
+} from 'react-native';
 import Modal from 'react-native-modal';
 import questionInfos from '../../utils/QuestionInfos';
+
+const width = Dimensions.get('window').width;
 
 const DecisionMaker = props => {
   const [money, setMoney] = useState(50000);
@@ -33,21 +43,23 @@ const DecisionMaker = props => {
 
           {isEndStage ? (
             <View>
-              <View>
-                <Text>{money}원</Text>
+              <Text style={styles.resultMoney}>{money * 0.0001}만원</Text>
+              <View style={styles.confirmButton}>
+                <Button
+                  title="확인"
+                  color="#ffffff"
+                  onPress={() => {
+                    props.navigation.navigate('AddEvent');
+                  }}
+                />
               </View>
-              <Button
-                title="확인"
-                onPress={() => {
-                  props.navigation.navigate('AddEvent');
-                }}
-              />
             </View>
           ) : (
-            <View>
-              <View>
+            <View style={styles.buttonWrapper}>
+              <View style={styles.yesButton}>
                 <Button
                   title="네"
+                  color="#ffffff"
                   onPress={() => {
                     if (questionInfos[currentStage].yes.amount) {
                       setMoney(money + questionInfos[currentStage].yes.amount);
@@ -56,9 +68,10 @@ const DecisionMaker = props => {
                   }}
                 />
               </View>
-              <View>
+              <View style={styles.noButton}>
                 <Button
                   title="아니오"
+                  color="#ffffff"
                   onPress={() => {
                     if (questionInfos[currentStage].no.amout) {
                       setMoney(money + questionInfos[currentStage].no.amout);
@@ -80,6 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#ffffff',
   },
   content: {
     backgroundColor: 'white',
@@ -97,6 +111,34 @@ const styles = StyleSheet.create({
     padding: 20,
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  buttonWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: width * 0.6,
+  },
+  yesButton: {
+    width: width * 0.2,
+    padding: 3,
+    borderRadius: 5,
+    backgroundColor: '#00A679',
+  },
+  noButton: {
+    width: width * 0.2,
+    padding: 3,
+    borderRadius: 5,
+    backgroundColor: '#fa5252',
+  },
+  resultMoney: {
+    fontSize: 20,
+    paddingBottom: 20,
+    textAlign: 'center',
+  },
+  confirmButton: {
+    width: width * 0.3,
+    padding: 5,
+    borderRadius: 5,
+    backgroundColor: '#00A679',
   },
 });
 

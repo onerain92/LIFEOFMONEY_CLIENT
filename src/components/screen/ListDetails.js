@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {
   SafeAreaView,
   View,
+  Dimensions,
   Text,
   TouchableOpacity,
   ScrollView,
@@ -16,6 +17,8 @@ import {
   saveReceivedEventLists,
 } from '../../actions/index';
 import {AddIcon, EditIcon} from '../../../assets/icons/Icons';
+
+const width = Dimensions.get('window').width;
 
 const ListDetails = props => {
   const dispatch = useDispatch();
@@ -38,13 +41,21 @@ const ListDetails = props => {
 
   const EventList = ({eventId, eventType, createdAt, money}) => {
     return (
-      <View style={styles.spendingList}>
-        <Text>{eventType}</Text>
-        <Text>{createdAt.slice(0, 10)}</Text>
-        <Text>{money}</Text>
-        <TouchableOpacity>
-          <EditIcon />
-        </TouchableOpacity>
+      <View style={styles.historyList}>
+        <View style={styles.listBox}>
+          <Text style={styles.eventType}>{eventType}</Text>
+        </View>
+        <View style={styles.listBox}>
+          <Text style={styles.date}>{createdAt.slice(0, 10)}</Text>
+        </View>
+        <View style={styles.listBox}>
+          <Text style={styles.money}>{money * 0.0001}만원</Text>
+        </View>
+        <View style={styles.editButton}>
+          <TouchableOpacity>
+            <EditIcon />
+          </TouchableOpacity>
+        </View>
       </View>
     );
   };
@@ -53,7 +64,7 @@ const ListDetails = props => {
     const years = [];
     const currentYear = new Date().getFullYear();
     for (let i = 1; i < 11; i++) {
-      years.push({label: `${currentYear + i}`, value: `${currentYear + i}`});
+      years.push({label: `${currentYear + i}년`, value: `${currentYear + i}`});
     }
     setYears(years);
   };
@@ -76,31 +87,26 @@ const ListDetails = props => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <Text>{relation}</Text>
-        <Text>{name}</Text>
-
-        <View style={styles.giveMoneyContainer}>
-          <View>
-            <Text>준 돈</Text>
-            <View>
-              <TouchableOpacity
-                onPress={() =>
-                  props.navigation.navigate('AddEvent', {
-                    sort: 'give',
-                    recipientId,
-                    name,
-                    relation,
-                  })
-                }>
-                <View style={styles.addEventButton}>
-                  <AddIcon />
-                </View>
-              </TouchableOpacity>
-            </View>
+      <View style={styles.spendMoneyContainer}>
+        <View style={styles.spendMoneyWrapper}>
+          <Text style={styles.spendMoneyText}>지출</Text>
+          <View style={styles.addEventButton}>
+            <TouchableOpacity
+              onPress={() =>
+                props.navigation.navigate('AddEvent', {
+                  sort: 'give',
+                  recipientId,
+                  name,
+                  relation,
+                })
+              }>
+              <AddIcon />
+            </TouchableOpacity>
           </View>
+        </View>
 
-          <View>
+        <View style={styles.spendMoneyHistoryWrapper}>
+          {spendingEventLists.length > 0 ? (
             <FlatList
               style={styles.list}
               data={spendingEventLists}
@@ -114,41 +120,51 @@ const ListDetails = props => {
               )}
               keyExtractor={item => item._id}
             />
-          </View>
+          ) : (
+            <View style={styles.noHistoryWrapper}>
+              <Text style={styles.noHistory}>기록이 없습니다.</Text>
+            </View>
+          )}
+        </View>
 
-          <View>
+        <View style={styles.compoundInterestWrapper}>
+          <View style={styles.yearSelector}>
             <RNPickerSelect
+              placeholder={{label: '년도 선택', value: null}}
               onValueChange={value => {
                 calculateCompoundInterest(Number(value));
               }}
               items={years}
             />
-            <Text>{repayment}</Text>
+          </View>
+          <Text style={styles.compoundInterestText}>에 돌려받는다면?</Text>
+          <View style={styles.compoundInterestBox}>
+            <Text style={styles.compoundInterest}>{repayment}원</Text>
+          </View>
+        </View>
+      </View>
+
+      <View style={styles.receivedMoneyContainer}>
+        <View style={styles.receivedMoneyWrapper}>
+          <Text style={styles.receivedMoneyText}>수입</Text>
+          <View style={styles.addEventButton}>
+            <TouchableOpacity
+              onPress={() =>
+                props.navigation.navigate('AddEvent', {
+                  sort: 'take',
+                  recipientId,
+                  name,
+                  relation,
+                })
+              }>
+              <AddIcon />
+            </TouchableOpacity>
           </View>
         </View>
 
-        <View style={styles.receiveMoneyContainer}>
-          <View>
-            <Text>받은 돈</Text>
-            <View>
-              <TouchableOpacity
-                onPress={() =>
-                  props.navigation.navigate('AddEvent', {
-                    sort: 'take',
-                    recipientId,
-                    name,
-                    relation,
-                  })
-                }>
-                <View style={styles.addEventButton}>
-                  <AddIcon />
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <View>
-          <FlatList
+        <View style={styles.receivedMoneyHistoryWrapper}>
+          {receivedEventLists.length > 0 ? (
+            <FlatList
               style={styles.list}
               data={receivedEventLists}
               renderItem={({item}) => (
@@ -161,9 +177,13 @@ const ListDetails = props => {
               )}
               keyExtractor={item => item._id}
             />
-          </View>
+          ) : (
+            <View style={styles.noHistoryWrapper}>
+              <Text style={styles.noHistory}>기록이 없습니다.</Text>
+            </View>
+          )}
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
@@ -173,25 +193,120 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#ffffff',
   },
-  giveMoneyContainer: {
+  spendMoneyContainer: {
+    position: 'relative',
+    flex: 0.55,
+    width: width,
+    borderBottomWidth: 1,
     borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#ced4da',
   },
-  spendingList: {
-    height: 100,
+  spendMoneyWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 5,
+    backgroundColor: '#fa5252',
+  },
+  spendMoneyText: {
+    padding: 10,
+    fontSize: 20,
+    marginLeft: 20,
+    color: '#ffffff',
+  },
+  spendMoneyHistoryWrapper: {
+    padding: 10,
+  },
+  historyList: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+  },
+  listBox: {
+    flex: 0.25,
+    paddingTop: 3,
+  },
+  eventType: {
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  date: {
+    fontSize: 15,
+    textAlign: 'right',
+  },
+  money: {
+    fontSize: 15,
+    textAlign: 'right',
   },
   addEventButton: {
     flexDirection: 'row',
     padding: 5,
     alignItems: 'center',
   },
-  receiveMoneyContainer: {
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: 'black',
+  compoundInterestWrapper: {
+    position: 'absolute',
+    flexDirection: 'row',
+    width: width,
+    bottom: 0,
+    padding: 10,
+    backgroundColor: '#f1f3f5',
   },
+  yearSelector: {
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    fontSize: 20,
+    color: 'black',
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 5,
+  },
+  compoundInterestText: {
+    paddingTop: 10,
+    paddingLeft: 5,
+    fontSize: 16,
+  },
+  compoundInterestBox: {
+    position: 'absolute',
+    top: '50%',
+    right: '15%',
+  },
+  compoundInterest: {
+    fontSize: 20,
+    color: '#fa5252',
+  },
+  receivedMoneyContainer: {
+    flex: 0.45,
+    width: width,
+    borderBottomWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#ced4da',
+  },
+  receivedMoneyWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 5,
+    backgroundColor: '#00A67A',
+  },
+  receivedMoneyText: {
+    padding: 10,
+    fontSize: 20,
+    marginLeft: 20,
+    color: '#ffffff',
+  },
+  receivedMoneyHistoryWrapper: {
+    padding: 10,
+  },
+  noHistoryWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '25%',
+  },
+  noHistory: {
+    fontSize: 20,
+    color: '#adb5bd',
+  }
 });
 
 export default ListDetails;
