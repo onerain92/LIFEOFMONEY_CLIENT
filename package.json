@@ -35,13 +35,18 @@
     "@babel/runtime": "7.6.3",
     "@react-native-community/eslint-config": "0.0.3",
     "babel-jest": "24.9.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "^3.4.3",
     "eslint": "6.6.0",
     "flow-bin": "^0.105.0",
     "jest": "24.9.0",
     "metro-react-native-babel-preset": "0.51.1",
+    "react-dom": "^16.11.0",
     "react-test-renderer": "16.9.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   }
 }
