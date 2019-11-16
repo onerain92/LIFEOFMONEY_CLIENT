@@ -6,7 +6,6 @@ import {
   Dimensions,
   Text,
   TouchableOpacity,
-  ScrollView,
   FlatList,
   StyleSheet,
 } from 'react-native';

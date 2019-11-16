@@ -83,7 +83,7 @@ const totalReceivedMoneyReducer = (
   }
 };
 
-export default lifeOfMoney = combineReducers({
+const lifeOfMoney = combineReducers({
   user: userReducer,
   recipientLists: recipientListsReducer,
   spendingEventLists: spendingEventListsReducer,
@@ -91,3 +91,5 @@ export default lifeOfMoney = combineReducers({
   totalSpendMoney: totalSpendMoneyReducer,
   totalReceivedMoney: totalReceivedMoneyReducer,
 });
+
+export default lifeOfMoney;

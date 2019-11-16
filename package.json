@@ -47,6 +47,8 @@
   },
   "jest": {
     "preset": "react-native",
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }

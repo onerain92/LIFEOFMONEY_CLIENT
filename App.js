@@ -7,7 +7,6 @@
  */
 
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import lifeOfMoney from './src/reducers';
