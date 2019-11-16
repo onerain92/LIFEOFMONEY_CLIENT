@@ -15,6 +15,7 @@ import {createEvent} from '../../api/index';
 import {
   saveSpendingEventLists,
   saveReceivedEventLists,
+  saveRecipientLists
 } from '../../actions/index';
 
 const width = Dimensions.get('window').width;
@@ -29,7 +30,7 @@ const AddEvent = props => {
   const relation = props.navigation.getParam('relation', 'No relation');
 
   const [eventType, setEventType] = useState('');
-  const [money, setMoney] = useState(0);
+  const [money, setMoney] = useState('0');
   const [modalContent, setModalContent] = useState('');
   const [isModal, setIsModal] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -118,6 +119,7 @@ const AddEvent = props => {
                         dispatch(
                           saveReceivedEventLists(data.receivedEventLists),
                         );
+                        dispatch(saveRecipientLists(data.recipientLists));
                       } else {
                         setIsSuccess(false);
                         setModalContent(data.failureMessage);

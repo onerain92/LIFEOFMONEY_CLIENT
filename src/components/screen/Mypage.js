@@ -53,8 +53,10 @@ const Mypage = props => {
 
       <View style={styles.gifWrapper}>
         {diffrence >= 0 ? (
-          <View style={styles.speechBallon}>
-            <Text style={styles.speechPlusText}>흑자다!</Text>
+          <View >
+            <View style={styles.speechBallon}>
+              <Text style={styles.speechPlusText}>흑자다!</Text>
+            </View>
             <View>
               <Image source={SMILE} style={styles.gifAnimation} />
             </View>

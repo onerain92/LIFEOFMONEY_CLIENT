@@ -14,9 +14,7 @@ export default createStackNavigator(
   {
     initialRouteName: 'MainTabNavigator',
     defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#FFE555',
-      },
+      header: null,
     },
   },
 );

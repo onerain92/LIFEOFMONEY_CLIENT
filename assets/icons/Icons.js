@@ -14,7 +14,7 @@ export const CheckMoneyIcon = props => (
 );
 
 export const ResultIcon = props => (
-  <Svg width={24} height={24} {...props}>
+  <Svg width={24} height={24} {...props} fill="#00A67A" stroke="#00A67A">
     <Path d="M4 22V2h16v11.543C20 17.65 14 16 14 16s1.518 6-2.638 6H4zm18-7.614V0H2v24h10.189C15.352 24 22 16.777 22 14.386zM17 13H7v-1h10v1zm0-4H7v1h10V9zm0-3H7v1h10V6z" />
   </Svg>
 );
@@ -24,7 +24,7 @@ export const SearchIcon = props => (
     width={24}
     height={24}
     fill="none"
-    stroke="currentColor"
+    stroke="#00A67A"
     strokeWidth={2}
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -40,7 +40,7 @@ export const MypageIcon = props => (
     width={24}
     height={24}
     fill="none"
-    stroke="currentColor"
+    stroke="#00A67A"
     strokeWidth={2}
     strokeLinecap="round"
     strokeLinejoin="round"

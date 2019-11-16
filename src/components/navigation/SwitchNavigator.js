@@ -6,9 +6,9 @@ import Loading from '../screen/Loading';
 
 export const SwitchNavigator = createSwitchNavigator(
   {
-    Loading,
+    Loading: {screen: Loading},
     AuthStackNavigator,
-    MainStackNavigator
+    MainStackNavigator,
   },
   {
     initialRouteName: 'Loading',

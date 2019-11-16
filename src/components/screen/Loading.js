@@ -1,5 +1,11 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView, View, Image, StyleSheet, Dimensions} from 'react-native';
+import {
+  SafeAreaView,
+  StatusBar,
+  Image,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
 import {APP_LOADING} from '../../utils/Images';
 
 const width = Dimensions.get('window').width;
@@ -14,6 +20,7 @@ const Loading = props => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="#FFE555" />
       <Image style={styles.img} source={APP_LOADING} />
     </SafeAreaView>
   );
@@ -25,8 +32,8 @@ const styles = StyleSheet.create({
   },
   img: {
     width: width,
-    height: height
-  }
+    height: height,
+  },
 });
 
 export default Loading;
