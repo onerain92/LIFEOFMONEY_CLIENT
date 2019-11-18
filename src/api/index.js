@@ -2,7 +2,7 @@ import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 const api = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: 'http://lifeofmoneyserver-env.tjwrmyg7w7.ap-northeast-2.elasticbeanstalk.com',
 });
 
 export const getUser = token => {
